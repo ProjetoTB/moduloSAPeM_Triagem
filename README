@@ -1,0 +1,16 @@
+Novo repositório de formulários Triagem: Até 25 de dezembro de 2011 todos os
+formulários de triagem eram branchs de um mesmo projeto, contudo os formulários
+tomaram caminhos diferentes (apesar de muitos arquivos comuns), o que dificultou
+a utilização de patchs, rebases e etc. limitando o uso do git.
+
+Com isso a solução mais prática foi criar um novo repositório, onde cada
+formulario (forks do mesmo projeto) possui um diretorio próprio e há um
+diretorio de arquivos comuns (base). Assim a organização deste repo:
+
+. forks (diretorios com arquivos especificos)
+. base (arquivos comuns)
+. build_module.py (cria arquivos .tar.gz com modulos prontos para uso no SAPEM)
+
+para acesso ao repositorio antigo acesse:
+https://github.com/icsystems/moduloSAPeM_Triagem_old
+
