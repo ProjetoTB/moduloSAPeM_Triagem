@@ -1,73 +1,5 @@
-(function($){
-	$.fn.writePortugueseDate = function(){
-		var element = $(this[0]);
-		var mydate=new Date()
-		var year=mydate.getYear()
-		if (year<2000)
-		year += (year < 1900) ? 1900 : 0
-		var day=mydate.getDay()
-		var month=mydate.getMonth()
-		var daym=mydate.getDate()
-		if (daym<10)
-		daym="0"+daym
-		var dayarray=new Array(
-			"Domingo",
-			"Segunda-feira",
-			"Terça-feira",
-			"Quarta-feira",
-			"Quinta-feira",
-			"Sexta-feira",
-			"Sábado"
-		);
-		var montharray=new Array(
-			"de Janeiro de ",
-			"de Fevereiro de ",
-			"de Março de ",
-			"de Abril de ",
-			"de Maio de ",
-			"de Junho de",
-			"de Julho de ",
-			"de Agosto de ",
-			"de Setembro de ",
-			"de Outubro de ",
-			"de Novembro de ",
-			"de Dezembro de "
-		);
-		var msg = dayarray[day]+", "+daym+" "+montharray[month]+year;
-		element.val(msg);
-	};
-})(jQuery);
-
-function calculateAge(dateStr){
-	var data = new Date();
-	var arrayData = dateStr.split('/');
-	var ano = parseInt(arrayData[2]);
-	var mes = parseInt(arrayData[1],10);
-	var dia = parseInt(arrayData[0],10);
-	var mesAtual = data.getMonth() + 1;
-	var diaAtual = data.getDate();
-	var anoAtual = data.getFullYear();
-	var idade = anoAtual - ano;
-	if (mesAtual < mes) idade--;
-	if (mes == mesAtual && diaAtual < dia) idade--;
-	return idade;
-}
-//Make a clock
-function getTime(){
-	var time = new Date();
-	var hours = time.getHours();
-	if (hours.toString().length == 1)
-		hours = '0' + hours;
-	var minutes = time.getMinutes();
-	if (minutes.toString().length == 1)
-		minutes = '0' + minutes;
-	var timeStr = hours+':'+minutes;
-	return timeStr;
-}
-
 //After page is loaded set actions
 $(document).ready(function(){
-
 /*------------------------------Edition and Relation-----------------------------*/
 	//Make the urlbase (necessary case SAPeM migrate to another server)
 	var urlString = $(location).attr('href');
@@ -111,7 +43,6 @@ $(document).ready(function(){
 						if($(el)[0].nodeType == xml.ELEMENT_NODE){
 							var tagname = $(el)[0].tagName;
 							idDiv = $('#'+tagname).parent().attr('id');
-							//console.log(tagname + ' : ' + $('#'+tagname).attr('type'));
 							//Checkbox
 							if (tagname == 'sexo')
 								$('input[name=sexo]').each(function(){
@@ -164,7 +95,6 @@ $(document).ready(function(){
 						if($(el)[0].nodeType == xml.ELEMENT_NODE){
 							var tagname = $(el)[0].tagName;
 							idDiv = $('#'+tagname).parent().attr('id');
-							//console.log(tagname + ' : ' + $(el).text());
 							var hlcolor = '#FFF8C6';
 							if (tagname == 'numeroPaciente')
 								$('#' + tagname).val($(el).text());
@@ -282,7 +212,7 @@ $(document).ready(function(){
 	$('#grauInstrucaoChefeFamilia').change(function(){
 		$('#classeSocial').defineSocialClass($().countPoints());
 	});
-/* --------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------*/
 /* ---------------------------------------- Funcoes Auxiliares	-------------------------------------------*/
 	$.fn.showFields = function(argumento){
 		var dep = argumento;
@@ -294,6 +224,24 @@ $(document).ready(function(){
 					&& element[0].nodeName != 'SMALL'
 					&& element[0].nodeName != 'OPTION')
 					$(this).addClass('required');
+					$(this).removeAttr('disabled',false);
+				});
+			if($(dep[div]).css('display') != 'block')
+				$(dep[div]).toggle(function() {
+					$(this).css('background-color', hlcolor);
+					$(this).animate({backgroundColor : "white"}, 4000);
+					});
+		}
+	}
+	$.fn.showNotRequiredFields = function(argumento){
+		var dep = argumento;
+		for(div in dep){
+			var elems = $('*', dep[div]);
+			$(elems).each(function(){
+				var element = $(this);
+				if (   element[0].nodeName != 'FIELDSET'
+					&& element[0].nodeName != 'SMALL'
+					&& element[0].nodeName != 'OPTION')
 					$(this).removeAttr('disabled',false);
 				});
 			if($(dep[div]).css('display') != 'block')
@@ -318,30 +266,10 @@ $(document).ready(function(){
 				$(dep[div]).toggle();
 		}
 	}
-	$.fn.showTempoEmagrecimentoField = function(argumento){
-		var dep = argumento;
-		for(div in dep){
-			var elems = $('*', dep[div]);
-			$(elems).each(function(){
-				var element = $(this);
-				if (   element[0].nodeName != 'FIELDSET'
-					&& element[0].nodeName != 'SMALL'
-					&& element[0].nodeName != 'OPTION')
-					$(this).removeAttr('disabled',false);
-				});
-			if($(dep[div]).css('display') != 'block')
-				$(dep[div]).toggle(function() {
-					$(this).css('background-color', hlcolor);
-					$(this).animate({backgroundColor : "white"}, 4000);
-					});
-		}
-	}
 
-/* --------------------------------------------------------------------------------------------------------*/
 /*---------------------------------------------------------------------------------------------------------*/
 //Caso o usuario preencha com um numero maior que 12 no
 //numero de meses, o numero de anos e incrementado
-
 	$('#numeroMesesFumante').keyup(function(){
 		var meses = 0;
 		var anos = 0;
@@ -400,7 +328,6 @@ $(document).ready(function(){
 			return false;
 		}
 	});
-
 	$('.hour').livequery('keypress', function(e){
 		if((e.which > 31 && e.which < 48)||(e.which > 57))
 			return false;
@@ -418,17 +345,6 @@ $(document).ready(function(){
 	var hlcolor = '#FFF8C6';
 	var d = new Date()
 	var cYear = d.getFullYear();
-/*---------------------------------------------------------------------------------------------------------*/
-	//Make a clock in the page e write date in
-	//a portuguese format
-	//$('#form_triagem').submit(function(){
-	//	if (!ajaxEdicaoCompleto)
-	//		$('#horarioFimEntrevista').val(getTime());
-	//});
-	//$('#horarioInicioEntrevista').val(getTime());
-	//$('#data_consulta').writePortugueseDate();
-	//$('#dataFimTriagem').writePortugueseDate();
-/*---------------------------------------------------------------------------------------------------------*/
 	//Build birthday calendar
 	$('#data_nascimento').datepicker({
 			dateFormat: 'dd/mm/yy',
@@ -449,16 +365,16 @@ $(document).ready(function(){
 	});
 	//Pick consult date
 	$('#data_consulta').datepicker({
-			dateFormat: 'dd MM yy',
-			monthNames: ['de Janeiro de','de Fevereiro de','de Março de','de Abril de','de Maio de','de Junho de','de Julho de','de Agosto de','de Setembro de','de Outubro de','de Novembro de','de Dezembro de'],
-			monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Aug','Set','Out','Nov','Dez'],
-			maxDate: '+0d',
-			changeMonth: true,
-			changeYear: true,
-			maxDate   : '+0y',
-			minDate   : '-2y',
-			yearRange : '-130:+130',
-			dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+		dateFormat: 'dd MM yy',
+		monthNames: ['de Janeiro de','de Fevereiro de','de Março de','de Abril de','de Maio de','de Junho de','de Julho de','de Agosto de','de Setembro de','de Outubro de','de Novembro de','de Dezembro de'],
+		monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Aug','Set','Out','Nov','Dez'],
+		maxDate: '+0d',
+		changeMonth: true,
+		changeYear: true,
+		maxDate   : '+0y',
+		minDate   : '-2y',
+		yearRange : '-130:+130',
+		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
 	});
 	$('#dataFimTriagem').datepicker({
 			dateFormat: 'dd MM yy',
@@ -495,25 +411,6 @@ $(document).ready(function(){
 	});
 /*---------------------------------------------------------------------------------------------------------*/
 /*---------------------------------------------------------------------------------------------------------*/
-	//Fill States in 'Estado' selectbox
-	$.ajax({
-		url: './cgi-bin/autocomplete.py',
-		data:({service:'state'}),
-		dataType : 'json',
-		cache: false,
-		success : function(data){
-			$.each(data.suggestions, function(i, item){
-				$('#estado')
-					.append($('<option>'+item+'</option>' )
-						.attr('value', item)
-					);
-				$('#naturalidade')
-					.append($('<option>'+item+'</option>' )
-						.attr('value', item)
-					);
-			});
-		}
-	});
 	//Complete everything just with the CEP complete
 	$('#cep').keyup(function() {
 		var cepForm = $(this).val();
@@ -611,8 +508,6 @@ $(document).ready(function(){
 				$().hideFields(dep2);
 			}
 	});
-
-
 
 	$('#dispneia').change(function(){
 		var dep = new Array();
@@ -764,7 +659,6 @@ $(document).ready(function(){
 		else
 			$().hideFields(dep1);
 	});
-
 	$('#sidaUsoAntiRetroviral').change(function(){
 		var dep = new Array();
 		dep[0] = '#divDataInicioUsoRetroviral';
@@ -781,18 +675,17 @@ $(document).ready(function(){
 			else
 				$().hideFields(dep);
 	});
-
 /*------------------------------------------------------------------------------------------------*/
 /*---------------------------------- Logica  do Emagrecimento ------------------------------------*/
 	// Check emagrecimento field
 	$('#pesoAtual').change(function(){
 		var dep = new Array();
 		dep[0] = '#divTempoEmagrecimento';
-			var valor = parseFloat($(this).val(),10);
+		var valor = parseFloat($(this).val(),10);
 		var valorPeso = parseFloat($('#pesoHabitual').val(),10);
 		if ((valor != 0)&&(valorPeso != 0))
 			if (valor < valorPeso)
-				$().showTempoEmagrecimentoField(dep);
+				$().showNotRequiredFields(dep);
 			else{
 				$().hideFields(dep);
 				$('#emagrecimento').val('Não');
@@ -805,13 +698,12 @@ $(document).ready(function(){
 		var valorPeso = parseFloat($('#pesoAtual').val(),10);
 		if ((valor != 0)&&(valorPeso != 0))
 			if (valorPeso < valor)
-				$().showTempoEmagrecimentoField(dep);
+				$().showNotRequiredFields(dep);
 			else{
 				$().hideFields(dep);
 				$('#emagrecimento').val('Não');
 			}
 	});
-
 	$('#pesoAtual').change(function(){
 		var tempoEmagrecimento = parseInt($('#tempoEmagrecimentoSemanas').val(),10) / 4;
 		var percentagem = (parseFloat($('#pesoHabitual').val(),10) - parseFloat($('#pesoAtual').val(),10))/parseFloat($('#pesoHabitual').val(),10);
@@ -871,8 +763,6 @@ $(document).ready(function(){
 			else
 				$('#emagrecimento').val('Não');
 	});
-
-
 /*------------------------------------------------------------------------------------------------*/
 /*------------------------------------ Logica da Tosse -------------------------------------------*/
 $('#motivoVindaUnidadeSaude').change(function(){
