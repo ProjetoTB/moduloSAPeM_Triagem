@@ -1,43 +1,3 @@
-(function($){
-	$.fn.writePortugueseDate = function(){
-		var element = $(this[0]);
-		var mydate=new Date()
-		var year=mydate.getYear()
-		if (year<2000)
-		year += (year < 1900) ? 1900 : 0
-		var day=mydate.getDay()
-		var month=mydate.getMonth()
-		var daym=mydate.getDate()
-		if (daym<10)
-		daym="0"+daym
-		var dayarray=new Array(
-			"Domingo",
-			"Segunda-feira",
-			"Terça-feira",
-			"Quarta-feira",
-			"Quinta-feira",
-			"Sexta-feira",
-			"Sábado"
-		);
-		var montharray=new Array(
-			"de Janeiro de ",
-			"de Fevereiro de ",
-			"de Março de ",
-			"de Abril de ",
-			"de Maio de ",
-			"de Junho de",
-			"de Julho de ",
-			"de Agosto de ",
-			"de Setembro de ",
-			"de Outubro de ",
-			"de Novembro de ",
-			"de Dezembro de "
-		);
-		var msg = dayarray[day]+", "+daym+" "+montharray[month]+year;
-		element.val(msg);
-	};
-})(jQuery);
-
 function argumentsNNet(){
 	this.idade;
 	this.tosse;
@@ -89,36 +49,8 @@ argumentsNNet.prototype.Set = function(
 	this.sexo						= sexo;
 }
 
-function calculateAge(dateStr){
-	var data = new Date();
-	var arrayData = dateStr.split('/');
-	var ano = parseInt(arrayData[2]);
-	var mes = parseInt(arrayData[1],10);
-	var dia = parseInt(arrayData[0],10);
-	var mesAtual = data.getMonth() + 1;
-	var diaAtual = data.getDate();
-	var anoAtual = data.getFullYear();
-	var idade = anoAtual - ano;
-	if (mesAtual < mes) idade--;
-	if (mes == mesAtual && diaAtual < dia) idade--;
-	return idade;
-}
-//Make a clock
-function getTime(){
-	var time = new Date();
-	var hours = time.getHours();
-	if (hours.toString().length == 1)
-		hours = '0' + hours;
-	var minutes = time.getMinutes();
-	if (minutes.toString().length == 1)
-		minutes = '0' + minutes;
-	var timeStr = hours+':'+minutes;
-	return timeStr;
-}
-
 //After page is loaded set actions
 $(document).ready(function(){
-
 /*------------------------------Edition and Relation-----------------------------*/
 	//Make the urlbase (necessary case SAPeM migrate to another server)
 	var urlString = $(location).attr('href');
@@ -331,12 +263,7 @@ $(document).ready(function(){
 	$('#grauInstrucaoChefeFamilia').change(function(){
 		$('#classeSocial').defineSocialClass($().countPoints());
 	});
-/*--------------------------------------- Global Variables ------------------------------------------------*/
-	var hlcolor = '#FFF8C6';
-	var d = new Date()
-	var cYear = d.getFullYear();
-	var argNNet = new argumentsNNet();
-/*---------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------*/
 /* ---------------------------------------- Funcoes Auxiliares	-------------------------------------------*/
 	$.fn.showFields = function(argumento){
 		var dep = argumento;
@@ -454,7 +381,6 @@ $(document).ready(function(){
 /*---------------------------------------------------------------------------------------------------------*/
 //Caso o usuario preencha com um numero maior que 12 no
 //numero de meses, o numero de anos e incrementado
-
 	$('#numeroMesesFumante').keyup(function(){
 		var meses = 0;
 		var anos = 0;
@@ -513,7 +439,6 @@ $(document).ready(function(){
 			return false;
 		}
 	});
-
 	$('.hour').livequery('keypress', function(e){
 		if((e.which > 31 && e.which < 48)||(e.which > 57))
 			return false;
@@ -527,17 +452,11 @@ $(document).ready(function(){
 		centsLimit: 2
 	});
 /*---------------------------------------------------------------------------------------------------------*/
-	//Make a clock in the page e write date in
-	//a portuguese format
-//	$('#form_triagem').submit(function(){
-//		if (!ajaxEdicaoCompleto)
-//			$('#horarioFimEntrevista').val(getTime());
-//	});
-//	$('#horarioInicioEntrevista').val(getTime());
-//	$('#data_consulta').writePortugueseDate();
-//	$('#dataFimTriagem').writePortugueseDate();
-/*---------------------------------------------------------------------------------------------------------*/
-/*----------------------------------------- Neural Netwrok ------------------------------------------------*/
+/*--------------------------------------- Global Variables ------------------------------------------------*/
+	var hlcolor = '#FFF8C6';
+	var d = new Date()
+	var cYear = d.getFullYear();
+	var argNNet = new argumentsNNet();
 	//Build birthday calendar
 	$('#data_nascimento').datepicker({
 			dateFormat: 'dd/mm/yy',
@@ -560,6 +479,7 @@ $(document).ready(function(){
 				}
 			}
 	});
+	//Pick consult date
 	$('#data_consulta').datepicker({
 		dateFormat: 'dd MM yy',
 		monthNames: ['de Janeiro de','de Fevereiro de','de Março de','de Abril de','de Maio de','de Junho de','de Julho de','de Agosto de','de Setembro de','de Outubro de','de Novembro de','de Dezembro de'],
@@ -572,7 +492,6 @@ $(document).ready(function(){
 		yearRange : '-130:+130',
 		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
 	});
-
 	//Submit to the neural network to check the patient's possibility of having TB
 	$('select.sinais').change(function(){
 		if($('#idade').val() > 0 && $('#idade').val() <131){
@@ -624,25 +543,6 @@ $(document).ready(function(){
 	});
 /*---------------------------------------------------------------------------------------------------------*/
 /*---------------------------------------------------------------------------------------------------------*/
-	//Fill States in 'Estado' selectbox
-	$.ajax({
-		url: './cgi-bin/autocomplete.py',
-		data:({service:'state'}),
-		dataType : 'json',
-		cache: false,
-		success : function(data){
-			$.each(data.suggestions, function(i, item){
-				$('#estado')
-					.append($('<option>'+item+'</option>')
-						.attr('value', item)
-					);
-				$('#naturalidade')
-					.append($('<option>'+item+'</option>')
-						.attr('value', item)
-					);
-			});
-		}
-	});
 	//Complete everything just with the CEP complete
 	$('#cep').keyup(function() {
 		var cepForm = $(this).val();
@@ -690,6 +590,15 @@ $(document).ready(function(){
 	});
 /*---------------------------------------------------------------------------------------------------------*/
 /*------------------------------------  Take care of secondary fields  ------------------------------------*/
+	$('#exames').change(function(){
+		var dep = new Array();
+		dep[0] = '#divOutrasCondutas';
+
+		if ($(this).val() == 'outro')
+			$().showFields(dep);
+		else
+			$().hideFields(dep);
+	});
 	$('#causasNaoMedicas').change(function(){
 		var dep = new Array();
 		dep[0] = '#divEspecificarCausasNaoMedicas';
@@ -904,7 +813,7 @@ $(document).ready(function(){
 	$('#contatoTuberculosePositiva').change(function(){
 		var dep1 = new Array();
 		dep1[0] = '#divEscarroEraPositivo';
-		if ($(this).val() == 'sim')
+		if ($(this).val()=='sim')
 			$().showFields(dep1);
 		else
 			$().hideFields(dep1);
@@ -925,16 +834,6 @@ $(document).ready(function(){
 			else
 				$().hideFields(dep);
 	});
-
-	$('#exames').change(function(){
-		var dep = new Array();
-		dep[0] = '#divOutrasCondutas';
-
-		if ($(this).val() == 'outro')
-			$().showFields(dep);
-		else
-			$().hideFields(dep);
-	});
 /*------------------------------------------------------------------------------------------------*/
 /*---------------------------------- Logica  do Emagrecimento ------------------------------------*/
 	// Check emagrecimento field
@@ -952,7 +851,6 @@ $(document).ready(function(){
 				$().neuralNetwork();
 			}
 	});
-
 	$('#pesoHabitual').change(function(){
 		var dep = new Array();
 		dep[0] = '#divTempoEmagrecimento';
@@ -967,7 +865,6 @@ $(document).ready(function(){
 				$().neuralNetwork();
 			}
 	});
-
 	$('#pesoAtual').change(function(){
 		var tempoEmagrecimento = parseInt($('#tempoEmagrecimentoSemanas').val(),10) / 4;
 		var percentagem = (parseFloat($('#pesoHabitual').val(),10) - parseFloat($('#pesoAtual').val(),10))/parseFloat($('#pesoHabitual').val(),10);

@@ -4,27 +4,43 @@
 import cgi
 import cgitb
 import sys
+
 cgitb.enable()
 
 from mlp_net import MLP
 import numpy as np
 
 def runNet():
-	print 'Content-type: text/html'
-	print
 	#Translate input tags
+	"""
+		fields = (
+			'idade',
+			'tosse',
+			'hemoptoico',
+			'sudorese',
+			'febre',
+			'emagrecimento',
+			'dispneia',
+			'fuma',
+			'internacaoHospitalar',
+			#'sida'
+			'sexo'
+		)
+	"""
 	fields = (
 		'idade',
-		'tosse',
+		'sexo',
+		'dorToracica',
 		'hemoptoico',
 		'sudorese',
 		'febre',
-		'emagrecimento',
 		'dispneia',
-		'fuma',
+		'emagrecimento',
+		'tosse',
 		'internacaoHospitalar',
-		'sida'
+		'fuma',
 	)
+
 	form = cgi.FieldStorage()
 	input =[]
 	for f in fields:
@@ -32,6 +48,10 @@ def runNet():
 			value = form[f].value
 			if f == 'idade':
 				input.append(int(value))
+			elif value == 'Masculino':
+				input.append(-1)
+			elif value == 'Feminino':
+				input.append(1)
 			elif value == 'nao':
 				input.append(-1)
 			elif value == 'sim' or value=='Sim':
@@ -47,8 +67,8 @@ def runNet():
 		level = a/(1+nn.getLimit())
 	else:
 		level = a/(1-nn.getLimit())
-	outcome  = u"{ 'output': %.02f," %(nn.getOutput())
-	outcome += u"  'hThreshold': %.02f," %(nn.getHigherThreshold())
+	outcome  = u"{ 'output': %.03f," %(nn.getOutput())
+	outcome += u"  'hThreshold': %.02F," %(nn.getHigherThreshold())
 	outcome += u"  'lThreshold': %.02f," %(nn.getLowerThreshold())
 	if level < 0:
 		outcome += u"  'TB': 'no',"
@@ -61,6 +81,6 @@ def runNet():
 		else:
 			outcome += u"  'probability': 'alta',"
 	outcome += u" 'threshold' : %.02f }"%(nn.getLimit())
-	sys.stdout.write(outcome.encode('utf-8', 'replace'))
+	return outcome.encode('utf-8', 'replace')
 if __name__ == '__main__':
 	Main()
