@@ -1,58 +1,3 @@
-(function($){
-	$.fn.writePortugueseDate = function(){
-		var element = $(this[0]);
-		var mydate=new Date()
-		var year=mydate.getYear()
-		if (year<2000)
-		year += (year < 1900) ? 1900 : 0
-		var day=mydate.getDay()
-		var month=mydate.getMonth()
-		var daym=mydate.getDate()
-		if (daym<10)
-		daym="0"+daym
-		var dayarray=new Array(
-			"Domingo",
-			"Segunda-feira",
-			"Terça-feira",
-			"Quarta-feira",
-			"Quinta-feira",
-			"Sexta-feira",
-			"Sábado"
-		);
-		var montharray=new Array(
-			"de Janeiro de ",
-			"de Fevereiro de ",
-			"de Março de ",
-			"de Abril de ",
-			"de Maio de ",
-			"de Junho de",
-			"de Julho de ",
-			"de Agosto de ",
-			"de Setembro de ",
-			"de Outubro de ",
-			"de Novembro de ",
-			"de Dezembro de "
-		);
-		var msg = dayarray[day]+", "+daym+" "+montharray[month]+year;
-		element.val(msg);
-	};
-})(jQuery);
-
-function calculateAge(dateStr){
-	var data = new Date();
-	var arrayData = dateStr.split('/');
-	var ano = parseInt(arrayData[2]);
-	var mes = parseInt(arrayData[1],10);
-	var dia = parseInt(arrayData[0],10);
-	var mesAtual = data.getMonth() + 1;
-	var diaAtual = data.getDate();
-	var anoAtual = data.getFullYear();
-	var idade = anoAtual - ano;
-	if (mesAtual < mes) idade--;
-	if (mes == mesAtual && diaAtual < dia) idade--;
-	return idade;
-}
-
 //After page is loaded set actions
 $(document).ready(function(){
 
@@ -362,25 +307,6 @@ $(document).ready(function(){
 	});
 /*---------------------------------------------------------------------------------------------------------*/
 /*---------------------------------------------------------------------------------------------------------*/
-	//Fill States in 'Estado' selectbox
-	$.ajax({
-		url: './cgi-bin/autocomplete.py',
-		data:({service:'state'}),
-		dataType : 'json',
-		cache: false,
-		success : function(data){
-			$.each(data.suggestions, function(i, item){
-				$('#estado')
-					.append($('<option>'+item+'</option>')
-					.attr('value', item)
-				);
-				$('#naturalidade')
-					.append($('<option>'+item+'</option>')
-					.attr('value', item)
-				);
-			});
-		}
-	});
 	//Complete everything just with the CEP complete
 	$('#cep').keyup(function() {
 		var cepForm = $(this).val();
