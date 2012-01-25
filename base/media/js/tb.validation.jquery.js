@@ -5,6 +5,19 @@ function calculateIMC(peso, altura){
 	imc = 10000 * (imc/ (parseFloat(altura)*parseFloat(altura)));
 	return imc;
 }
+
+$.validator.addMethod("warningTempoEmagrecimentoSemanas", function(value, element) {
+	var retcode = parseInt(value) != 0;
+	var options = {idTest: 'warningTempoEmagrecimentoSemanas'};
+	var msg = '';
+	if (parseInt(value) == 0)
+		msg = "O tempo de emagrecimento é igual a 0. Confirma? "
+	retcode = $(element).ConfirmUI(msg, function(element){
+		return retcode;
+	},options);
+	return retcode;
+}, 'Por favor, confira o tempo de emagrecimento');
+
 $.validator.addMethod("warningAge", function(value, element) {
 	var retcode = parseInt(value) >= 1  && parseInt(value) <= 95;
 	var options = {idTest: 'warningAge'};
