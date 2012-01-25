@@ -833,6 +833,9 @@ $('#motivoVindaUnidadeSaude').change(function(){
 			pesoHabitual:{
 				range : [1, 500]
 			},
+			tempoEmagrecimentoSemanas:{
+				warningTempoEmagrecimentoSemanas: true
+			},
 			estado_civil:{
 				warningMaritalState:true
 			},
