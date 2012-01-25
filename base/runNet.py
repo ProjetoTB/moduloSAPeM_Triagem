@@ -49,9 +49,9 @@ def runNet():
 			if f == 'idade':
 				input.append(int(value))
 			elif value == 'Masculino':
-				input.append(-1)
-			elif value == 'Feminino':
 				input.append(1)
+			elif value == 'Feminino':
+				input.append(-1)
 			elif value == 'nao':
 				input.append(-1)
 			elif value == 'sim' or value=='Sim':
