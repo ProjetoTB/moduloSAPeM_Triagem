@@ -603,10 +603,10 @@ $(document).ready(function(){
 	$('#pesoAtual').change(function(){
 		var dep = new Array();
 		dep[0] = '#divTempoEmagrecimento';
-		var valor = parseFloat($(this).val(),10);
-		var valorPeso = parseFloat($('#pesoHabitual').val(),10);
-		if ((valor != 0)&&(valorPeso != 0))
-			if (valor < valorPeso)
+		var atual = parseFloat($(this).val(),10);
+		var habitual = parseFloat($('#pesoHabitual').val(),10);
+		if ((atual != 0)&&(habitual != 0))
+			if (atual < habitual)
 				$().showNotRequiredFields(dep);
 			else{
 				$().hideFields(dep);
@@ -616,10 +616,10 @@ $(document).ready(function(){
 	$('#pesoHabitual').change(function(){
 		var dep = new Array();
 		dep[0] = '#divTempoEmagrecimento';
-		var valor = parseFloat($(this).val(),10);
-		var valorPeso = parseFloat($('#pesoAtual').val(),10);
-		if ((valor != 0)&&(valorPeso != 0))
-			if (valorPeso < valor)
+		var habitual = parseFloat($(this).val(),10);
+		var atual = parseFloat($('#pesoAtual').val(),10);
+		if ((habitual != 0)&&(atual != 0))
+			if (atual < habitual)
 				$().showNotRequiredFields(dep);
 			else{
 				$().hideFields(dep);
@@ -629,7 +629,7 @@ $(document).ready(function(){
 	$('#pesoAtual').change(function(){
 		var tempoEmagrecimento = parseInt($('#tempoEmagrecimentoSemanas').val(),10) / 4;
 		var percentagem = (parseFloat($('#pesoHabitual').val(),10) - parseFloat($('#pesoAtual').val(),10))/parseFloat($('#pesoHabitual').val(),10);
-		if (tempoEmagrecimento >= 1 && tempoEmagrecimento < 3)
+		if (tempoEmagrecimento > 0 && tempoEmagrecimento < 3)
 			if(percentagem > 0.05)
 				$('#emagrecimento').val('Sim');
 			else
@@ -648,7 +648,7 @@ $(document).ready(function(){
 	$('#pesoHabitual').change(function(){
 		var tempoEmagrecimento = parseInt($('#tempoEmagrecimentoSemanas').val(),10) / 4;
 		var percentagem = (parseFloat($('#pesoHabitual').val(),10) - parseFloat($('#pesoAtual').val(),10))/parseFloat($('#pesoHabitual').val(),10);
-		if (tempoEmagrecimento >= 1 && tempoEmagrecimento < 3)
+		if (tempoEmagrecimento > 0 && tempoEmagrecimento < 3)
 			if(percentagem > 0.05)
 				$('#emagrecimento').val('Sim');
 			else
@@ -667,7 +667,7 @@ $(document).ready(function(){
 	$('#tempoEmagrecimentoSemanas').change(function(){
 		var tempoEmagrecimento = parseInt($('#tempoEmagrecimentoSemanas').val(),10) / 4;
 		var percentagem = (parseFloat($('#pesoHabitual').val(),10) - parseFloat($('#pesoAtual').val(),10))/parseFloat($('#pesoHabitual').val(),10);
-		if (tempoEmagrecimento >= 1 && tempoEmagrecimento < 3)
+		if (tempoEmagrecimento > 0 && tempoEmagrecimento < 3)
 			if(percentagem > 0.05)
 				$('#emagrecimento').val('Sim');
 			else
