@@ -11,6 +11,7 @@ import runNet as rn
 
 name = u'Triagem Baseline Ambulatório'
 version = u'v1.0.0'
+fields_xml_path = 'media/mapping.xml'
 
 def handle_request(request, fileName):
 	curr_dir = os.path.realpath(os.path.dirname(__file__))
@@ -34,5 +35,5 @@ def handle_request(request, fileName):
 	return static.serve(request, fileName, document_root=media_dir,
 	show_indexes=True)
 
-__all__ = ['name','version','handle_request']
+__all__ = ['name','version','handle_request', 'fields_xml_path']
 
