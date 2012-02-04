@@ -27,6 +27,7 @@ $(document).ready(function(){
 			type: 'POST',
 			url: url,
 			dataType: "html",
+			cache: false,
 			success: function(text){
 				if (window.DOMParser)
 				{
@@ -79,6 +80,7 @@ $(document).ready(function(){
 			type: 'POST',
 			url: url,
 			dataType: "html",
+			cache: false,
 			success: function(text){
 				if (window.DOMParser)
 				{
