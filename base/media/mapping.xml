@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <fields>
-	<data_consulta> Horário do início da entrevista </data_consulta>
+	<data_consulta> Data da triagem </data_consulta>
 	<horarioInicioEntrevista> Horário do Inicio da entrevista </horarioInicioEntrevista>
 	<unidade> Unidade </unidade>
 	<numeroPaciente> Número do Paciente no Estudo </numeroPaciente>
