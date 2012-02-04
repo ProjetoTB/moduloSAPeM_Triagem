@@ -53,21 +53,21 @@
 	<tempoEmagrecimentoSemanas> Tempo de Emagrecimento </tempoEmagrecimentoSemanas>
 	<emagrecimento> Emagrecimento </emagrecimento>
 	<tosse> Tosse </tosse>
-	<tempoTosse> Tempo </tempoTosse>
+	<tempoTosse> Há quanto tempo tem tosse </tempoTosse>
 	<expectoracao>  Expectoração </expectoracao>
-	<tempoExpectoracao> Tempo </tempoExpectoracao>
+	<tempoExpectoracao> Há quanto tempo tem expectoração </tempoExpectoracao>
 	<hemoptoico> Catarro com sangue </hemoptoico>
-	<tempoHemoptoico> Tempo </tempoHemoptoico>
+	<tempoHemoptoico> Há quanto tempo tem catarro com sangue </tempoHemoptoico>
 	<sudorese> Suor Noturno </sudorese>
-	<tempoSudorese> Tempo </tempoSudorese>
+	<tempoSudorese> Há quanto tempo tem suor noturno </tempoSudorese>
 	<febre> Febre </febre>
-	<tempoFebre> Tempo </tempoFebre>
+	<tempoFebre> Há quanto tempo tem febre </tempoFebre>
 	<perdaDeApetite> Perda de Apetite </perdaDeApetite>
-	<tempoPerdaDeApetite> Tempo </tempoPerdaDeApetite>
+	<tempoPerdaDeApetite> Há quanto tempo tem perda de apetite </tempoPerdaDeApetite>
 	<dispneia> Falta de ar </dispneia>
-	<tempoDispneia> Tempo </tempoDispneia>
+	<tempoDispneia> Há quanto tempo tem dispnéia </tempoDispneia>
 	<dorToracica> Dor no peito </dorToracica>
-	<tempoDorToracica> Tempo </tempoDorToracica>
+	<tempoDorToracica> Há quanto tempo tem dor torácica </tempoDorToracica>
 	<faltaAr> Possui ou já possuiu cansaço ou falta de ar em repouso </faltaAr>
 	<cansaco> Apresenta cansaço maior do que pessoas de sua idade durante atividades física </cansaco>
 	<interrompeuAtividade> Já interrompeu alguma atividade do dia-a-dia por cansaço ou falta de ar </interrompeuAtividade>
