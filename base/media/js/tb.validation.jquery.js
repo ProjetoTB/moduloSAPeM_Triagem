@@ -7,6 +7,8 @@ function calculateIMC(peso, altura){
 }
 
 $.validator.addMethod("warningTempoEmagrecimentoSemanas", function(value, element) {
+	if (value == '')
+		return true;
 	var retcode = parseInt(value) != 0;
 	var options = {idTest: 'warningTempoEmagrecimentoSemanas'};
 	var msg = '';
@@ -33,6 +35,8 @@ $.validator.addMethod("warningAge", function(value, element) {
 }, 'Por favor, confira a data de nascimento');
 
 $.validator.addMethod("warningCT", function(value, element) {
+	if (value == '')
+		return true;
 	var options = {idTest: 'warningCT'};
 	var age = $("#idade").val();
 	var target = 3 * (parseInt(age) - 10);
@@ -74,6 +78,8 @@ $.validator.addMethod("validIMC", function(value, element) {
 }, 'Por favor, confira o peso e altura do paciente.');
 
 $.validator.addMethod("warningWeight", function(value, element) {
+	if (value == '')
+		return true;
 	var options = {idTest: 'warningWeight'};
 	retcode = $(element).ConfirmUI('O paciente tem mais do que 150 kg. Confirma?', function(element){
 		return parseInt($(element).val()) <= 150;
@@ -82,10 +88,14 @@ $.validator.addMethod("warningWeight", function(value, element) {
 }, 'Por favor, confira o peso do paciente');
 
 $.validator.addMethod("warningHeight", function(value, element) {
+	if (value == '')
+		return true;
+
 	var options = {idTest: 'warningHeight'};
 	retcode = $(element).ConfirmUI('O paciente tem mais do que 200 cm. Confirma?', function(element){
 		return parseInt($(element).val()) <= 200;
 	},options);
+
 	return retcode;
 }, 'Por favor, confira altura do paciente');
 

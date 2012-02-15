@@ -311,6 +311,7 @@ $(document).ready(function(){
 						&& element[0].nodeName != 'SMALL'
 						&& element[0].nodeName != 'OPTION')
 						$(this).removeClass('required');
+						$(this).attr('disabled', true);
 					});
 			if($(dep[div]).css('display') != 'none')
 				$(dep[div]).toggle();

@@ -263,6 +263,7 @@ $(document).ready(function(){
 						&& element[0].nodeName != 'SMALL'
 						&& element[0].nodeName != 'OPTION')
 						$(this).removeClass('required');
+						$(this).attr('disabled', true);
 					});
 			if($(dep[div]).css('display') != 'none')
 				$(dep[div]).toggle();
@@ -821,13 +822,12 @@ $('#motivoVindaUnidadeSaude').change(function(){
 				validIMC : true,
 				warningHeight : true
 			},
-// JQuery UI calendar confuses the focus and blur events
-// The validation will be done directly to the calendar's code
+			// JQuery UI calendar confuses the focus and blur events
+			// The validation will be done directly to the calendar's code
 			idade:{
 				warningAge: true,
 				warningMaritalState: true
 			},
-			/*
 			pesoAtual:{
 				required: false,
 				range : [1, 500],
@@ -842,7 +842,6 @@ $('#motivoVindaUnidadeSaude').change(function(){
 				required: false,
 				warningTempoEmagrecimentoSemanas: true
 			},
-			*/
 			estado_civil:{
 				warningMaritalState:true
 			},
@@ -852,7 +851,6 @@ $('#motivoVindaUnidadeSaude').change(function(){
 				LowerThanCurrentYear: true,
 				maxlength: 4
 			},
-			/*
 			numeroAnosFumante:{
 				CantSmokeFor70Years: true,
 				yearsSmokingLowerThanAge: true,
@@ -862,18 +860,15 @@ $('#motivoVindaUnidadeSaude').change(function(){
 				numberOfCigarrettes: true,
 				warningNumberOfCigarrettes: true
 			},
-			*/
 			tempoResidenteEstadoAtual:{
 				yearsLowerThanAge: true
 			},
-			/*
 			cargaTabagistica:{
 				required: false,
 				max:   500,
 				warningCT: true,
 				checkCT: true
 			},
-			*/
 			avaliacao:{
 				max:	10
 			},
@@ -884,11 +879,9 @@ $('#motivoVindaUnidadeSaude').change(function(){
 				LowerThanCurrentYear: true,
 				maxlength: 4
 			},
-			/*
 			numeroAnosFumante:{
 				yearsSmokingLowerThanAge: true,
 			},
-			*/
 			tempoTosse:{
 				warningSymptoms:'20meses'
 			},
