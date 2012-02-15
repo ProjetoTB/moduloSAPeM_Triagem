@@ -35,8 +35,9 @@ $.validator.addMethod("warningAge", function(value, element) {
 $.validator.addMethod("warningCT", function(value, element) {
 	var options = {idTest: 'warningCT'};
 	var age = $("#idade").val();
-	var target = 3*(parseInt(age)-10);
-	retcode = $(element).ConfirmUI('O número de anos que o paciente fuma é igual a ' + $('#numeroAnosFumante').val() + ' e o número de cigarros por dia é igual a ' + $('#numeroCigarros').val() + ' cigarros/dia. Confirma?', function(element){
+	var target = 3 * (parseInt(age) - 10);
+	msg = 'O número de anos que o paciente fuma é igual a ' + $('#numeroAnosFumante').val() + ' e o número de cigarros por dia é igual a ' + $('#numeroCigarros').val() + ' cigarros/dia. Confirma?';
+	retcode = $(element).ConfirmUI(msg, function(element){
 		return $(element).val() <= target;
 	},options);
 	return retcode;
@@ -73,7 +74,7 @@ $.validator.addMethod("validIMC", function(value, element) {
 }, 'Por favor, confira o peso e altura do paciente.');
 
 $.validator.addMethod("warningWeight", function(value, element) {
-	var options = {idTest: 'warningWeght'};
+	var options = {idTest: 'warningWeight'};
 	retcode = $(element).ConfirmUI('O paciente tem mais do que 150 kg. Confirma?', function(element){
 		return parseInt($(element).val()) <= 150;
 	},options);
@@ -197,7 +198,7 @@ $.validator.addMethod("checkCT", function(value, element) {
 	var age = $("#idade").val();
 	var target = 5*(parseInt(age));
 	return parseInt($(element).val()) < target
-}, 'Por favor, confira a quantidade de cigarros fumados e a quantos anos o paciente fuma.');
+}, 'Por favor, confira a quantidade de cigarros fumados e há quantos anos o paciente fuma.');
 
 $.validator.addMethod("lowerThanHIVTest", function(value, element) {
 	return parseInt($('#data_sida').val()) > 1987;
