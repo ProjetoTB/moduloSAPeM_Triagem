@@ -216,15 +216,23 @@ div.wrap{
 	display: inline;
 }
 
+div.odd{
+	background-color: #D1E6ED;
+}
+
+div.even{
+	background-color: #FFFFFF;
+}
+
 div.sinais{
 	width:40%;
 	float:left;
 }
 
 div.tempoSinais{
-	width:58%;
-	clear:none;
-	float:right;
+	width: 58%;
+	clear: none;
+	float: left;
 }
 
 div.tempoSinais label{
