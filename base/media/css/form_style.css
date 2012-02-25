@@ -220,16 +220,13 @@ div.sinais{
 	width:40%;
 	float:left;
 }
-div.sinais label{
-	width:223px;
-}
 
 div.tempoSinais{
-	width:48%;
+	width:58%;
 	clear:none;
 	float:right;
 }
 
 div.tempoSinais label{
-	width: 50px;
+	width: 10%;
 }
