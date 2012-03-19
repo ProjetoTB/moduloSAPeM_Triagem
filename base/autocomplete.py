@@ -27,9 +27,9 @@ def JSONizer(q, res):
 	jStr = jStr.encode('ascii', 'backslashreplace')
 	retstr = "{"
 	if q!='':
-		retstr= retstr + "query:'%s',"%(q,)
+		retstr= retstr + 'query:"%s",'%(q,)
 	retstr=  retstr + """
-	suggestions:[
+	"suggestions":[
 		%s
 	]
 	}
@@ -48,7 +48,7 @@ class autoComplete:
 			SELECT DISTINCT UF
 			FROM cidadesbr
 		""")
-		retarr = ["'%s'"%string.strip(r[0]) for r in cursor]
+		retarr = ['"%s"'%string.strip(r[0]) for r in cursor]
 		cursor.close()
 		self.conn.close()
 		return retarr
@@ -65,7 +65,7 @@ class autoComplete:
 				AND UF = '%s'
 			LIMIT 9
 		"""%(normalizeString(self.q) , state, ))
-		retarr = ["'%s'"%string.strip(r[0]) for r in cursor]
+		retarr = [u"'%s'"%string.strip(r[0]) for r in cursor]
 		cursor.close()
 		self.conn.close()
 		return retarr
@@ -85,7 +85,7 @@ class autoComplete:
 				AND cidadesbr.Nome = '%s'
 			LIMIT 9
 		"""%(normalizeString(self.q) , city, ))
-		retarr = ["'%s'"%string.strip(r[0]) for r in cursor]
+		retarr = ['"%s"'%string.strip(r[0]) for r in cursor]
 		cursor.close()
 		self.conn.close()
 		return retarr
@@ -120,7 +120,7 @@ class autoComplete:
 				AND Localidade = '%s'
 			LIMIT 9
 		"""%(normalizeString(self.q) , city, ))
-		retarr = [u"'%s'"%string.strip(r[0]) for r in cursor]
+		retarr = ['u"%s"'%string.strip(r[0]) for r in cursor]
 		cursor.close()
 		self.conn.close()
 		return retarr
@@ -226,7 +226,7 @@ def Main(service,city,state,q):
 			res = ac.retrieveStreets(city)
 		elif service == 'cep':
 			res = ac.completeFromCEP()
-			str = u"{'cep':'%s','state':'%s','city':'%s','street':'%s'}"%(q, res['UF'], res['Localidade'], res['NomeCompleto'],)
+			str = u'{"cep":"%s","state":"%s","city":"%s","street":"%s"}'%(q, res["UF"], res["Localidade"], res["NomeCompleto"],)
 			return str.encode('ascii', 'backslashreplace')
 	except customError, e:
 		msg = e.value
