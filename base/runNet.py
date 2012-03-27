@@ -67,20 +67,20 @@ def runNet():
 		level = a/(1+nn.getLimit())
 	else:
 		level = a/(1-nn.getLimit())
-	outcome  = u"{ 'output': %.03f," %(nn.getOutput())
-	outcome += u"  'hThreshold': %.02F," %(nn.getHigherThreshold())
-	outcome += u"  'lThreshold': %.02f," %(nn.getLowerThreshold())
+	outcome  = u'{ "output": %.03f,' %(nn.getOutput())
+	outcome += u'  "hThreshold": %.02F,' %(nn.getHigherThreshold())
+	outcome += u'  "lThreshold": %.02f,' %(nn.getLowerThreshold())
 	if level < 0:
-		outcome += u"  'TB': 'no',"
+		outcome += u'  "TB": "no",'
 	else:
-		outcome += u"  'TB': 'yes',"
+		outcome += u'  "TB": "yes",'
 		if nn.getOutput() < nn.getLowerThreshold():
-			outcome += u"  'probability': 'baixa',"
+			outcome += u'  "probability": "baixa",'
 		elif nn.getOutput() < nn.getHigherThreshold():
-			outcome += u"  'probability': 'média',"
+			outcome += u'  "probability": "média",'
 		else:
-			outcome += u"  'probability': 'alta',"
-	outcome += u" 'threshold' : %.02f }"%(nn.getLimit())
+			outcome += u'  "probability": "alta",'
+	outcome += u' "threshold" : %.02f }'%(nn.getLimit())
 	return outcome.encode('utf-8', 'replace')
 if __name__ == '__main__':
 	Main()
