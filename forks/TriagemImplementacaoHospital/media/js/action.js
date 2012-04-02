@@ -117,6 +117,7 @@ $(document).ready(function(){
 		var numPaciente = urlArray[urlArray.length-2];
 		var numForm = urlArray[urlArray.length-3] - 1;
 		var url = urlbase + 'patientLastRegister/' + numForm + '/' + numPaciente + '/';
+		/*
 		$.ajax({
 			url: urlbase + 'healthCenter/name/',
 			dataType : 'text',
@@ -125,6 +126,7 @@ $(document).ready(function(){
 				$('#unidade').val(data);
 			}
 		});
+		*/
 		$.ajax({
 			type: 'POST',
 			url: url,
@@ -1066,4 +1068,5 @@ $('#motivoVindaUnidadeSaude').change(function(){
 		}
 	});
 /*-----------------------------------------------------------------------------------------------*/
+	$('form *').autosave();
 });

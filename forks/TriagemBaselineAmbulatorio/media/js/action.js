@@ -15,6 +15,7 @@ $(document).ready(function(){
 		else
 			urlbase += '/' + urlArray[indexToRunUrlString];
 	urlbase += '/';
+
 	//Relation between forms
 	//Diagnóstico - Triagem e Exames
 	if (urlString.search("edit") != -1){
@@ -66,14 +67,16 @@ $(document).ready(function(){
 		var numPaciente = urlArray[urlArray.length-2];
 		var numForm = urlArray[urlArray.length-3] - 1;
 		var url = urlbase + 'patientLastRegister/' + numForm + '/' + numPaciente + '/';
+		/*
 		$.ajax({
 			url: urlbase + 'healthCenter/name/',
 			dataType : 'text',
 			cache: false,
 			success : function(data){
-				$('#unidade').val(data);
+				$("#unidade").val(data);
 			}
 		});
+		*/
 		$.ajax({
 			type: 'POST',
 			url: url,
@@ -906,4 +909,5 @@ $('#motivoVindaUnidadeSaude').change(function(){
 		}
 	});
 /*-----------------------------------------------------------------------------------------------*/
+	$('form *').autosave();
 });

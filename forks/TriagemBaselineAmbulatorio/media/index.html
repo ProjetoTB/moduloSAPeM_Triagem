@@ -14,6 +14,8 @@
 	<script src='./js/jquery.price_format.1.3.js' type='text/javascript'></script>
 	<script type="text/javascript" src="js/base_functions.js"></script>
 	<script type="text/javascript" src="js/action.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="js/autosave.js"></script>
 
 	<style type='text/css'>
 	<!--
@@ -33,6 +35,7 @@
 		<div id='content'>
 			<div id='maincontent'>
 			<form name='form_triagem' id='form_triagem' action='cgi-bin/submitForm' method='POST'>
+			<p><span class="autosave_saving">Salvando...</span></p>
 				<fieldset>
 					<div id='divDataConsulta' class='primary required'>
 						<label for='data_consulta'> Data da triagem: </label>

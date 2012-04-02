@@ -122,5 +122,3 @@ $(document).ready(function(){
 		$('footer').createFooter();
 	});
 });
-
-
