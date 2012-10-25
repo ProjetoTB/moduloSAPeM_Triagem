@@ -6,4 +6,5 @@ rsync -vaz --delete modules/moduloSAPeM_TriagemBaselineHospital/  /home/fferreir
 rsync -vaz --delete modules/moduloSAPeM_TriagemImplementacaoAmbulatorio/ /home/fferreira/sapem/tbForms/modules/icsystems-moduleSAPeM_Triagem_RB0EuI/
 rsync -vaz --delete modules/moduloSAPeM_TriagemImplementacaoHospital/ /home/fferreira/sapem/tbForms/modules/icsystems-moduleSAPeM_Triagem_diJgHX/
 rsync -vaz --delete modules/moduloSAPeM_TriagemResistencia/ /home/fferreira/sapem/tbForms/modules/icsystems-moduloSAPeM_Triagem-ResistenciaAmbulatorio_M9uO92/
+rsync -vaz --delete modules/moduloSAPeM_TriagemIntervencaoHospital/ /home/fferreira/sapem/tbForms/modules/moduloSAPeM_TriagemIntervencaoHospital_ySEjy5/
 

@@ -67,7 +67,8 @@
 	<contatoTuberculoseResistente> Contato com TB pulmonar resistente </contatoTuberculoseResistente>
 	<fumante> Fumante </fumante>
 	<numeroCigarros> Número de cigarros que fuma/fumava por dia </numeroCigarros>
-	<numeroAnosFumante> Há quanto tempo fuma/fumou </numeroAnosFumante>
+	<numeroAnosFumante> Há quantos anos fuma/fumou </numeroAnosFumante>
+	<numeroMesesFumante> Há quantos meses fuma/fumou </numeroMesesFumante>
 	<tempoParouFumar> Há quanto tempo parou de fumar? </tempoParouFumar>
 	<cargaTabagistica> Carga Tabágica </cargaTabagistica>
 	<bebida> Consome bebidas alcoólicas </bebida>
