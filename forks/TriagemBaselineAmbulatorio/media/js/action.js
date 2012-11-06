@@ -20,6 +20,7 @@ $(document).ready(function(){
 	if (urlString.search("edit") != -1){
 		var fichaId = urlArray[urlArray.length-2];
 		var url = urlbase + 'ficha/' + fichaId + '/';
+        var fields_xml_path = urlbase + "form/fields/xml/2/"; // MELHORAR: retirar hard-coded do id do form TriagemBaselineAmbulatorio (2)
 		$('#form_consulta').append("<input type='hidden' id='edit' name='edit' value='" + fichaId + "'/>");
 		var ajaxEdicaoCompleto = false;
 		window.setTimeout(function(){$.ajax({
@@ -38,29 +39,37 @@ $(document).ready(function(){
 					xml.loadXML(text);
 				}
 				if (xml.getElementsByTagName('error')[0] == undefined){
-					var elements = xml.getElementsByTagName('documento')[0].childNodes;
-					$(elements).each(function(){
-						var el = $(this).get(0);
-						if($(el)[0].nodeType == xml.ELEMENT_NODE){
-							var tagname = $(el)[0].tagName;
-							idDiv = $('#'+tagname).parent().attr('id');
-							//Checkbox
-							if (tagname == 'sexo')
-								$('input[name=sexo]').each(function(){
-								if ($(el).text().search($(this).val()) != -1)
-									$(this).attr('checked',true);
-								});
-							$('#'+tagname).val($(el).text());
-							$('#'+tagname).change();
-							ajaxEdicaoCompleto = true;
-						}
-					});
-				}
+                    // Parseando arquivo que determina a ordem dos campos...
+                    $.ajax({
+                        type    : 'POST',
+                        url     : fields_xml_path,
+                        dataType: "html",
+                        cache   : false,
+                        success : function(mapping){
+                            parser = new DOMParser();
+                            fields_xml = parser.parseFromString(mapping, "text/xml");
+                            for (f=0; f < fields_xml.getElementsByTagName("fields")[0].childNodes.length; f++){
+                                if (fields_xml.getElementsByTagName("fields")[0].childNodes[f].tagName != undefined){
+                                    xmlField = xml.getElementsByTagName(fields_xml.getElementsByTagName("fields")[0].childNodes[f].tagName)[0];
+                                    if (xmlField != undefined){
+                                        if (xmlField.childNodes.length != 0){
+                                            $("input:radio").each(function(){
+                                                if (xml.getElementsByTagName($(this).attr("name"))[0] != undefined)
+                                                    if (xml.getElementsByTagName($(this).attr("name"))[0].childNodes[0].nodeValue.search($(this).val()) != -1)
+                                                        $(this).attr('checked', true);
+                                            });
+                                            $("#" + fields_xml.getElementsByTagName("fields")[0].childNodes[f].tagName)
+                                                .val(xmlField.childNodes[0].nodeValue)
+                                                .trigger("change")
+                                            ;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
 			},
-			complete: function(){
-				if (ajaxEdicaoCompleto)
-					$('#sida').change();
-			}
 		});},1000);
 	}else{
 		var numPaciente = urlArray[urlArray.length-2];
