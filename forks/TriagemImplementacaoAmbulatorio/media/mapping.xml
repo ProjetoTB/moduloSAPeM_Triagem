@@ -81,8 +81,9 @@
 	<fumante> Fumante </fumante>
 	<numeroCigarros> Número de cigarros que fuma/fumava por dia </numeroCigarros>
 	<numeroAnosFumante> Há quantos anos fuma/fumou </numeroAnosFumante>
-        <numeroMesesFumante> Há quantos meses fuma/fumou </numeroMesesFumante>
-	<numeroAnosExFumante> Há quanto tempo parou de fumar </numeroAnosExFumante>
+    <numeroMesesFumante> Há quantos meses fuma/fumou </numeroMesesFumante>
+	<numeroAnosExFumante> Há quantos anos parou de fumar </numeroAnosExFumante>
+    <numeroMesesExFumante> Há quantos meses parou de fumar </numeroMesesExFumante>
 	<cargaTabagistica> Carga Tabágica </cargaTabagistica>
 	<bebida> Consome bebidas alcoólicas </bebida>
 	<criterio_cage_0> Já sentiu que deveria diminuir a quantidade de bebida? </criterio_cage_0>
