@@ -399,6 +399,22 @@ $(document).ready(function(){
 				$().hideFields(dep1);
 			}
 	});
+    $('#causasNaoMedicas').change(function(){
+		var dep = new Array();
+		dep[0] = '#divEspecificarCausasNaoMedicas';
+		if ($(this).val() == 'outros')
+			$().showFields(dep);
+		else
+			$().hideFields(dep);
+	});
+	$('#causasMedicas').change(function(){
+		var dep = new Array();
+		dep[0] = '#divEspecificarCausasMedicas';
+		if ($(this).val() == 'outros')
+			$().showFields(dep);
+		else
+			$().hideFields(dep);
+	});
 	$('#pacienteExcluido').change(function(){
 			var dep1 = new Array();
 			dep1[0] = '#divDataAssinatura';
